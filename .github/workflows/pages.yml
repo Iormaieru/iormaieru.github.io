@@ -1,0 +1,42 @@
+# GitHub Pages: sitio estático personal
+# https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Preparar sitio
+        run: |
+          mkdir -p public
+          cp index.html styles.css script.js public/
+          cp ivan.png "CV Ivan Rios Maieru.pdf" public/
+
+      - name: Subir artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

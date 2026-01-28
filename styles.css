@@ -320,6 +320,7 @@ main > section[id].section-active {
   margin: 0 0 var(--space-lg);
   color: var(--color-text-muted);
   max-width: 65ch;
+  text-align: justify;
 }
 
 .about-content strong {
@@ -380,6 +381,7 @@ main > section[id].section-active {
   font-size: 0.95rem;
   color: var(--color-text-muted);
   line-height: 1.65;
+  text-align: justify;
 }
 
 /* ===== Educación (cards) ===== */

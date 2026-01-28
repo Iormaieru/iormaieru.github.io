@@ -60,9 +60,12 @@ a:hover {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(12, 15, 20, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(12, 15, 20, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  transition: background var(--transition), border-color var(--transition);
 }
 
 .nav {
@@ -93,10 +96,36 @@ a:hover {
   color: var(--color-text-muted);
   font-size: 0.9rem;
   font-weight: 500;
+  position: relative;
+  padding: var(--space-xs) 0;
+  transition: color var(--transition);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width var(--transition);
 }
 
 .nav-links a:hover {
   color: var(--color-text);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a.active {
+  color: var(--color-accent);
+}
+
+.nav-links a.active::after {
+  width: 100%;
 }
 
 .nav-toggle {
@@ -204,10 +233,20 @@ a:hover {
 }
 
 .hero-tagline {
-  font-size: 1.15rem;
-  color: var(--color-text-muted);
+  font-size: 1.25rem;
+  color: var(--color-text);
   margin-bottom: var(--space-xl);
-  max-width: 520px;
+  max-width: 600px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.hero-tagline strong {
+  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
 }
 
 .hero-actions {
@@ -287,14 +326,15 @@ main > section[id] {
 }
 
 main > section[id]:not(.section-active) {
-  opacity: 0.5;
-  filter: blur(4px);
+  opacity: 0.6;
+  filter: blur(2px);
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
 main > section[id].section-active {
   opacity: 1;
   filter: none;
-  box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.12);
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
 /* ===== Secciones ===== */
@@ -382,6 +422,27 @@ main > section[id].section-active {
   color: var(--color-text-muted);
   line-height: 1.65;
   text-align: justify;
+}
+
+.timeline-description {
+  margin-top: var(--space-md);
+}
+
+.timeline-description p {
+  margin: 0 0 var(--space-md);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.timeline-description p:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-description strong {
+  color: var(--color-accent);
+  font-weight: 600;
 }
 
 /* ===== Educación (cards) ===== */
@@ -516,6 +577,42 @@ main > section[id].section-active {
   color: var(--color-text-muted);
 }
 
+/* ===== Mejoras de branding visual ===== */
+.hero-title {
+  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-brand {
+  background: linear-gradient(135deg, var(--color-accent) 0%, #5eead4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: transform var(--transition);
+}
+
+.nav-brand:hover {
+  transform: scale(1.05);
+}
+
+.section-title {
+  position: relative;
+  padding-bottom: var(--space-md);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);
+  border-radius: 2px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .nav-links {
@@ -565,6 +662,17 @@ main > section[id].section-active {
   .hero-tagline {
     margin-left: auto;
     margin-right: auto;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .timeline-description p {
+    font-size: 0.9rem;
+  }
+  
+  .section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .hero-actions {

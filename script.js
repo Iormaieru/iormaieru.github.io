@@ -95,6 +95,16 @@
     sections.forEach(function (s) {
       s.classList.toggle('section-active', s.id === activeId);
     });
+    
+    // Actualizar enlaces del menú con clase active
+    document.querySelectorAll('.nav-links a').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (href === '#' + activeId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
   }
 
   var ticking = false;

@@ -18,19 +18,14 @@
     <header class="header">
       <nav class="nav" aria-label="Navegación principal">
         <a href="#inicio" class="nav-brand">IR</a>
-        <ul class="nav-links">
-          <li><a href="#sobre-mi">Sobre mí</a></li>
-          <li><a href="#experiencia">Experiencia</a></li>
-          <li><a href="#educacion">Educación</a></li>
-          <li><a href="#certificaciones">Certificaciones</a></li>
-          <li><a href="#habilidades">Habilidades</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
         <button
           class="nav-toggle"
+          type="button"
           aria-label="Abrir menú"
           aria-expanded="false">
-          <span></span><span></span><span></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
         </button>
       </nav>
     </header>
@@ -499,6 +494,24 @@
     <footer class="footer">
       <p>© <span id="year"></span> Ivan O. Rios Maieru</p>
     </footer>
+
+    <!-- Overlay y menú móvil al final del body para que queden siempre por encima del contenido (incl. imagen) -->
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li class="nav-links-header">
+        <button type="button" class="nav-close" aria-label="Cerrar menú">
+          <span aria-hidden="true">×</span>
+        </button>
+      </li>
+      <li class="nav-links-list">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#educacion">Educación</a>
+        <a href="#certificaciones">Certificaciones</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#contacto">Contacto</a>
+      </li>
+    </ul>
 
     <script src="script.js"></script>
   </body>

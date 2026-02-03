@@ -10,21 +10,43 @@
   // Menú móvil
   var toggle = document.querySelector('.nav-toggle');
   var navLinks = document.querySelector('.nav-links');
+  var navClose = document.querySelector('.nav-close');
+  var navOverlay = document.getElementById('nav-overlay');
+
+  function setMenuOpen(open) {
+    if (!navLinks || !toggle) return;
+    navLinks.setAttribute('data-open', String(open));
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    toggle.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+    if (navOverlay) {
+      navOverlay.setAttribute('aria-hidden', String(!open));
+    }
+  }
 
   if (toggle && navLinks) {
     toggle.addEventListener('click', function () {
-      var open = navLinks.getAttribute('data-open') === 'true';
-      navLinks.setAttribute('data-open', String(!open));
-      toggle.setAttribute('aria-expanded', String(!open));
-      toggle.setAttribute('aria-label', open ? 'Abrir menú' : 'Cerrar menú');
+      var open = navLinks.getAttribute('data-open') !== 'true';
+      setMenuOpen(open);
     });
+
+    if (navClose) {
+      navClose.addEventListener('click', function () {
+        setMenuOpen(false);
+      });
+    }
+
+    if (navOverlay) {
+      navOverlay.addEventListener('click', function () {
+        setMenuOpen(false);
+      });
+    }
 
     // Cerrar al hacer clic en un enlace (navegación móvil)
     navLinks.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
-        navLinks.setAttribute('data-open', 'false');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Abrir menú');
+        setMenuOpen(false);
       });
     });
   }
